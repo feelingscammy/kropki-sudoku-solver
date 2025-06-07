@@ -1,0 +1,440 @@
+.landing-section, .solver-section {
+    min-height: 100vh;
+    width: 100vw;
+}
+
+.solver-section {
+    background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+}
+
+body {
+    font-family: 'Arial Rounded MT Bold', 'Helvetica Rounded', Arial, sans-serif;
+    text-align: center;
+    background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+h1 {
+    color: #2d3748;
+    margin-bottom: 30px;
+    font-size: 2.5em;
+    text-shadow: 2px 2px 0px rgba(0,0,0,0.1);
+}
+
+table {
+    background: white;
+    margin: 20px auto;
+    border-collapse: collapse;
+    border: 2px solid #2d3748;
+    border-radius: 4px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+}
+
+/* Remove the table hover transform */
+table:hover {
+    transform: none;
+}
+
+td {
+    width: 40px;
+    height: 40px;
+    border: 1px solid #cbd5e0;
+    position: relative;
+}
+
+/* Add thicker borders for 3x3 boxes */
+tr:nth-child(3n) td {
+    border-bottom: 2px solid #2d3748;
+}
+
+tr:first-child td {
+    border-top: none;
+}
+
+td:nth-child(3n) {
+    border-right: 2px solid #2d3748;
+}
+
+td:first-child {
+    border-left: none;
+}
+
+/* Remove Chrome's default number input arrows */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Remove Firefox's default number input arrows */
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
+input {
+    width: 100%;
+    height: 100%;
+    border: none;
+    text-align: center;
+    font-size: 18px;
+    background: transparent;
+    outline: none;
+    color: #2d3748;
+    transition: background-color 0.2s ease;
+}
+
+input:focus {
+    background-color: rgba(66, 153, 225, 0.1);
+}
+
+.controls {
+    background-color: white;
+    padding: 25px 35px;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    margin: 30px auto;
+    width: fit-content;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.dot-selector {
+    padding: 12px 24px;
+    margin: 0;  /* Remove margin and use gap instead */
+    border: 2px solid #e2e8f0;
+    border-radius: 12px;
+    background: white;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-weight: 600;
+    color: #4a5568;
+    flex: 0 1 auto;  /* Allow buttons to shrink but not grow */
+}
+
+.dot-selector:hover {
+    border-color: #4299e1;
+    color: #4299e1;
+    transform: translateY(-2px);
+}
+
+.dot-selector.selected {
+    border-color: #4299e1;
+    background-color: #ebf8ff;
+    color: #2b6cb0;
+}
+
+#solveBtn, #clearBtn {
+    margin: 0;  /* Remove margin and use gap instead */
+    padding: 12px 28px;
+    font-size: 16px;
+    font-weight: 600;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin: 0 10px;
+}
+
+#solveBtn {
+    background-color: #4299e1;
+    color: white;
+    box-shadow: 0 4px 15px rgba(66, 153, 225, 0.4);
+}
+
+#clearBtn {
+    background-color: #fc8181;
+    color: white;
+    box-shadow: 0 4px 15px rgba(252, 129, 129, 0.4);
+}
+
+#solveBtn:hover, #clearBtn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+}
+
+#solveBtn:active, #clearBtn:active {
+    transform: translateY(0);
+}
+
+/* Enhance dot styling */
+.dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    position: absolute;
+    cursor: pointer;
+    background-color: #e2e8f0;
+    transition: all 0.2s ease;
+    z-index: 2;
+}
+
+.dot:hover {
+    transform: scale(1.2);
+    box-shadow: 0 0 5px rgba(0,0,0,0.2);
+}
+
+.dot.black-dot {
+    background-color: #2d3748;
+    border: 1px solid white;
+    box-shadow: 0 0 5px rgba(0,0,0,0.3);
+}
+
+.dot.white-dot {
+    background-color: white;
+    border: 2px solid #2d3748;
+    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+}
+
+.instructions {
+    background: linear-gradient(to bottom right, #ffffff, #f8f9fa);
+    padding: 30px;
+    position: fixed;
+    left: -400px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 320px;
+    max-height: 500px;
+    overflow-y: auto;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
+    border-radius: 12px;
+    margin-left: 60px;
+    opacity: 0;
+    visibility: hidden;
+    text-align: left;
+}
+
+.instructions.open {
+    left: 20px;
+    opacity: 1;
+    visibility: visible;
+}
+
+.instructions h3 {
+    color: #1a202c;
+    font-size: 1.4em;
+    margin-bottom: 25px;
+    font-weight: 600;
+    border-bottom: 2px solid #e2e8f0;
+    padding-bottom: 12px;
+    text-align: center;  /* Changed from left to center */
+}
+
+.instructions ol {
+    padding-left: 25px;
+    color: #4a5568;
+    text-align: left;
+}
+
+.instructions li {
+    margin-bottom: 18px;
+    line-height: 1.6;
+}
+
+.instructions ul {
+    padding-left: 20px;
+    margin: 12px 0;
+}
+
+.instructions ul li {
+    margin-bottom: 10px;
+    list-style-type: none;
+    position: relative;
+}
+
+.instructions ul li:before {
+    content: "•";
+    color: #4299e1;
+    font-weight: bold;
+    position: absolute;
+    left: -15px;
+}
+
+/* Instructions Button Styling */
+#instructionsBtn {
+    position: fixed;
+    left: 30px;
+    bottom: 30px;
+    background-color: #4299e1;
+    color: white;
+    border: none;
+    border-radius: 50px;
+    padding: 12px 24px;
+    cursor: pointer;
+    z-index: 1001;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 10px rgba(66, 153, 225, 0.3);
+    display: flex;
+    align-items: center;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+#instructionsBtn:hover {
+    background-color: #3182ce;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(66, 153, 225, 0.4);
+}
+
+#instructionsBtn:active {
+    transform: translateY(0);
+}
+
+.close-instructions {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: none;
+    border: none;
+    font-size: 28px;
+    cursor: pointer;
+    color: #a0aec0;
+    transition: all 0.2s ease;
+    padding: 5px;
+    line-height: 0.8;
+}
+
+.close-instructions:hover {
+    color: #2d3748;
+    transform: rotate(90deg);
+}
+
+/* Center the main content */
+.main-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Adjust controls position */
+.controls {
+    margin-bottom: 20px;
+}
+
+/* Disable inputs while solving */
+.solving input {
+    pointer-events: none;
+    opacity: 0.7;
+}
+
+.solving .dot {
+    pointer-events: none;
+}
+
+#solveBtn {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 12px 24px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+#solveBtn:hover {
+    background-color: #218838;
+}
+
+.solving {
+    cursor: wait;
+}
+
+#solveBtn.solving {
+    background-color: #6c757d;
+    position: relative;
+    overflow: hidden;
+}
+
+.progress-bar {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 4px;
+    background-color: #28a745;
+    transition: width 0.3s ease;
+}
+
+/* Clear button styling */
+#clearBtn {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 12px 24px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    margin-left: 10px;
+}
+
+#clearBtn:hover {
+    background-color: #c82333;
+}
+
+#clearBtn:active {
+    transform: scale(0.98);
+}
+
+/* Add smooth scrollbar for instructions */
+.instructions::-webkit-scrollbar {
+    width: 6px;
+}
+
+.instructions::-webkit-scrollbar-track {
+    background: #f7fafc;
+}
+
+.instructions::-webkit-scrollbar-thumb {
+    background: #cbd5e0;
+    border-radius: 3px;
+}
+
+.instructions::-webkit-scrollbar-thumb:hover {
+    background: #a0aec0;
+}
+
+/* Add icons to instructions button */
+#instructionsBtn::before {
+    content: "📖";
+    margin-right: 8px;
+}
+
+/* Adjust dot positions accounting for thicker borders */
+.dot.horizontal {
+    left: 100%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 3;
+}
+
+.dot.vertical {
+    left: 50%;
+    top: 100%;
+    transform: translate(-50%, -50%);
+    z-index: 3;
+}
+
+/* Adjust dots at 3x3 box borders */
+td:nth-child(3n) .dot.horizontal {
+    left: calc(100% + 1px); /* Compensate for thicker border */
+}
+
+tr:nth-child(3n) .dot.vertical {
+    top: calc(100% + 1px); /* Compensate for thicker border */
+}

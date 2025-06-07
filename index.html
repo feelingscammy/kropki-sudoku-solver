@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kropki Sudoku Solver</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="landing.css">
+</head>
+<body>
+    <!-- Landing page section -->
+    <div id="landing" class="landing-section">
+        <div class="dots-decoration">
+            <div class="decoration-dot black"></div>
+            <div class="decoration-dot white"></div>
+            <div class="decoration-dot black"></div>
+            <div class="decoration-dot white"></div>
+        </div>
+        <div class="container">
+            <h1 class="title">Kropki Sudoku Solver</h1>
+            <p class="subtitle">...by <a href="https://github.com/feelingscammy" target="_blank">feelingscammy</a></p>
+            <button class="start-button" onclick="showSolver()">
+                Start Solving!
+            </button>
+        </div>
+    </div>
+
+    <!-- Solver section -->
+    <div id="solver" class="solver-section" style="display: none;">
+        <div class="main-content">
+            <div class="controls">
+                <button class="dot-selector" id="blackDot">⚫ Black Dot</button>
+                <button class="dot-selector" id="whiteDot">⚪ White Dot</button>
+                <button class="dot-selector" id="noDot">❌ Remove Dot</button>
+            </div>
+
+            <table id="grid"></table>
+            
+            <div class="button-group">
+                <button id="solveBtn">Solve Puzzle</button>
+                <button id="clearBtn">Clear Grid</button>
+            </div>
+        </div>
+
+        <button id="instructionsBtn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 8px;">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="12" y1="16" x2="12" y2="12"></line>
+                <line x1="12" y1="8" x2="12.01" y2="8"></line>
+            </svg>
+            How to Use
+        </button>
+        
+        <div class="instructions">
+            <button class="close-instructions">&times;</button>
+            <h3>How to Use:</h3>
+            <ol>
+                <li>Enter known numbers (1-9) in the cells</li>
+                <li>Select a dot type:
+                    <ul>
+                        <li><strong>Black Dot:</strong> One number is double the other</li>
+                        <li><strong>White Dot:</strong> Numbers differ by one</li>
+                        <li><strong>No Dot:</strong> Remove existing dot</li>
+                    </ul>
+                </li>
+                <li>Click between cells to place dots</li>
+                <li>Click "Solve" to complete the puzzle</li>
+            </ol>
+        </div>
+    </div>
+
+    <script>
+        function showSolver() {
+            document.getElementById('landing').style.display = 'none';
+            document.getElementById('solver').style.display = 'block';
+        }
+    </script>
+    <script src="script.js"></script>
+</body>
+</html>
