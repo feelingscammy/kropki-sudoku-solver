@@ -4,52 +4,55 @@ class KropkiSolver {
         this.grid = Array(size).fill().map(() => Array(size).fill(0));
         this.horizontalDots = Array(size).fill().map(() => Array(size - 1).fill('none'));
         this.verticalDots = Array(size - 1).fill().map(() => Array(size).fill('none'));
+        // Pre-calculate box coordinates for better performance
+        this.boxSize = Math.sqrt(size);
     }
 
     isValid(row, col, num) {
-        // Check row and column
-        for (let i = 0; i < this.size; i++) {
-            if (this.grid[row][i] === num || this.grid[i][col] === num) {
-                return false;
+        // Check row
+        for (let x = 0; x < this.size; x++) {
+            if (this.grid[row][x] === num) return false;
+        }
+
+        // Check column
+        for (let x = 0; x < this.size; x++) {
+            if (this.grid[x][col] === num) return false;
+        }
+
+        // Check 3x3 box
+        let boxRow = Math.floor(row / this.boxSize) * this.boxSize;
+        let boxCol = Math.floor(col / this.boxSize) * this.boxSize;
+        for (let i = 0; i < this.boxSize; i++) {
+            for (let j = 0; j < this.boxSize; j++) {
+                if (this.grid[boxRow + i][boxCol + j] === num) return false;
             }
         }
 
         // Check dot constraints
-        if (col > 0) { // Check left dot
-            const leftNum = this.grid[row][col - 1];
-            if (leftNum !== 0) {
-                const dot = this.horizontalDots[row][col - 1];
-                if (!this.checkDotConstraint(leftNum, num, dot)) {
-                    return false;
-                }
-            }
+        if (!this.checkDotsForPosition(row, col, num)) return false;
+
+        return true;
+    }
+
+    checkDotsForPosition(row, col, num) {
+        // Check horizontal dots
+        if (col > 0 && this.grid[row][col - 1] !== 0) {
+            if (!this.checkDotConstraint(this.grid[row][col - 1], num, this.horizontalDots[row][col - 1])) 
+                return false;
         }
-        if (col < this.size - 1) { // Check right dot
-            const rightNum = this.grid[row][col + 1];
-            if (rightNum !== 0) {
-                const dot = this.horizontalDots[row][col];
-                if (!this.checkDotConstraint(num, rightNum, dot)) {
-                    return false;
-                }
-            }
+        if (col < this.size - 1 && this.grid[row][col + 1] !== 0) {
+            if (!this.checkDotConstraint(num, this.grid[row][col + 1], this.horizontalDots[row][col])) 
+                return false;
         }
-        if (row > 0) { // Check upper dot
-            const upperNum = this.grid[row - 1][col];
-            if (upperNum !== 0) {
-                const dot = this.verticalDots[row - 1][col];
-                if (!this.checkDotConstraint(upperNum, num, dot)) {
-                    return false;
-                }
-            }
+
+        // Check vertical dots
+        if (row > 0 && this.grid[row - 1][col] !== 0) {
+            if (!this.checkDotConstraint(this.grid[row - 1][col], num, this.verticalDots[row - 1][col])) 
+                return false;
         }
-        if (row < this.size - 1) { // Check lower dot
-            const lowerNum = this.grid[row + 1][col];
-            if (lowerNum !== 0) {
-                const dot = this.verticalDots[row][col];
-                if (!this.checkDotConstraint(num, lowerNum, dot)) {
-                    return false;
-                }
-            }
+        if (row < this.size - 1 && this.grid[row + 1][col] !== 0) {
+            if (!this.checkDotConstraint(num, this.grid[row + 1][col], this.verticalDots[row][col])) 
+                return false;
         }
 
         return true;
@@ -64,26 +67,50 @@ class KropkiSolver {
         return true;
     }
 
-    solve(row = 0, col = 0) {
-        if (col === this.size) {
-            row++;
-            col = 0;
-        }
-        if (row === this.size) {
-            return true;
-        }
+    findEmptyCell() {
+        // Find cell with fewest possible values first
+        let minPossibilities = this.size + 1;
+        let bestCell = null;
 
-        if (this.grid[row][col] !== 0) {
-            return this.solve(row, col + 1);
+        for (let i = 0; i < this.size; i++) {
+            for (let j = 0; j < this.size; j++) {
+                if (this.grid[i][j] === 0) {
+                    let count = this.countPossibleValues(i, j);
+                    if (count < minPossibilities) {
+                        minPossibilities = count;
+                        bestCell = [i, j];
+                        // Early exit if we find a cell with minimum possible values
+                        if (minPossibilities === 1) return bestCell;
+                    }
+                }
+            }
         }
+        return bestCell;
+    }
 
+    countPossibleValues(row, col) {
+        let count = 0;
         for (let num = 1; num <= this.size; num++) {
+            if (this.isValid(row, col, num)) count++;
+        }
+        return count;
+    }
+
+    solve() {
+        let emptyCell = this.findEmptyCell();
+        if (!emptyCell) return true; // puzzle is solved
+
+        let [row, col] = emptyCell;
+        
+        // Try numbers in random order to avoid getting stuck in patterns
+        let numbers = [...Array(this.size)].map((_, i) => i + 1);
+        numbers = numbers.sort(() => Math.random() - 0.5);
+
+        for (let num of numbers) {
             if (this.isValid(row, col, num)) {
                 this.grid[row][col] = num;
-                if (this.solve(row, col + 1)) {
-                    return true;
-                }
-                this.grid[row][col] = 0;
+                if (this.solve()) return true;
+                this.grid[row][col] = 0; // backtrack
             }
         }
         return false;
