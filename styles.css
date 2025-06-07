@@ -4,7 +4,9 @@
 }
 
 .solver-section {
-    background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+    background: linear-gradient(-45deg, #0A2463, #3E92CC, #1B4EA8, #2E6BBE);
+    background-size: 400% 400%;
+    animation: gradient 15s ease infinite;
 }
 
 body {
@@ -30,41 +32,49 @@ h1 {
 }
 
 table {
-    background: white;
-    margin: 20px auto;
+    background: rgba(255, 255, 255, 0.95);
+    margin: 0 auto;
     border-collapse: collapse;
-    border: 2px solid #2d3748;
-    border-radius: 4px;
-    box-shadow: 0 8px 30px rgba(0,0,0,0.12);
-}
-
-/* Remove the table hover transform */
-table:hover {
-    transform: none;
-}
-
-td {
-    width: 40px;
-    height: 40px;
-    border: 1px solid #cbd5e0;
+    border: 2px solid rgba(45, 55, 72, 0.9);
+    border-radius: 8px;
+    box-shadow: 
+        0 10px 30px rgba(0, 0, 0, 0.1),
+        0 0 0 1px rgba(255, 255, 255, 0.1);
+    transform: translateZ(50px);
     position: relative;
+    z-index: 2;
+    overflow: hidden;
 }
 
-/* Add thicker borders for 3x3 boxes */
+/* Remove hover transform and add table wrapper for blur effect */
+.table-wrapper {
+    position: relative;
+    padding: 30px;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(20px);
+    box-shadow: 
+        0 15px 35px rgba(0, 0, 0, 0.2),
+        0 0 0 1px rgba(255, 255, 255, 0.1);
+}
+
+/* Enhance cell styling */
+td {
+    width: 45px;
+    height: 45px;
+    border: 1px solid rgba(203, 213, 224, 0.9);
+    position: relative;
+    background: white;
+    transition: background-color 0.2s ease;
+}
+
+/* Make grid lines more prominent */
 tr:nth-child(3n) td {
     border-bottom: 2px solid #2d3748;
 }
 
-tr:first-child td {
-    border-top: none;
-}
-
 td:nth-child(3n) {
     border-right: 2px solid #2d3748;
-}
-
-td:first-child {
-    border-left: none;
 }
 
 /* Remove Chrome's default number input arrows */
@@ -84,115 +94,151 @@ input {
     height: 100%;
     border: none;
     text-align: center;
-    font-size: 18px;
+    font-size: 20px;
     background: transparent;
     outline: none;
     color: #2d3748;
-    transition: background-color 0.2s ease;
+    font-weight: 600;
+    cursor: pointer;
+    caret-color: #4299e1;
 }
 
 input:focus {
-    background-color: rgba(66, 153, 225, 0.1);
+    background-color: rgba(66, 153, 225, 0.08);
+    box-shadow: inset 0 0 0 2px rgba(66, 153, 225, 0.4);
+}
+
+/* Add subtle hover effect on cells */
+td:hover {
+    background-color: rgba(66, 153, 225, 0.04);
 }
 
 .controls {
-    background-color: white;
+    background: rgba(255, 255, 255, 0.1);
     padding: 25px 35px;
     border-radius: 15px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    margin: 30px auto;
     width: fit-content;
     display: flex;
     justify-content: center;
     gap: 20px;
     flex-wrap: wrap;
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    transform: translateZ(25px);
+    margin: 0; /* Remove margin, use gap instead */
 }
 
 .dot-selector {
     padding: 12px 24px;
-    margin: 0;  /* Remove margin and use gap instead */
-    border: 2px solid #e2e8f0;
+    margin: 0;
+    border: 2px solid rgba(255, 255, 255, 0.2);
     border-radius: 12px;
-    background: white;
+    background: rgba(255, 255, 255, 0.1);
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: all 0.3s ease;
     font-weight: 600;
-    color: #4a5568;
-    flex: 0 1 auto;  /* Allow buttons to shrink but not grow */
+    color: white;
 }
 
 .dot-selector:hover {
-    border-color: #4299e1;
-    color: #4299e1;
     transform: translateY(-2px);
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.3);
 }
 
 .dot-selector.selected {
-    border-color: #4299e1;
-    background-color: #ebf8ff;
-    color: #2b6cb0;
+    background: rgba(66, 153, 225, 0.3);
+    border-color: rgba(144, 205, 244, 0.5);
+    color: white;
 }
 
 #solveBtn, #clearBtn {
-    margin: 0;  /* Remove margin and use gap instead */
     padding: 12px 28px;
     font-size: 16px;
     font-weight: 600;
     border: none;
-    border-radius: 12px;
+    border-radius: 50px;
     cursor: pointer;
     transition: all 0.3s ease;
     margin: 0 10px;
+    backdrop-filter: blur(10px);
+    position: relative;
+    overflow: hidden;
 }
 
 #solveBtn {
-    background-color: #4299e1;
+    background: rgba(66, 153, 225, 0.2);
     color: white;
-    box-shadow: 0 4px 15px rgba(66, 153, 225, 0.4);
+    border: 2px solid rgba(255, 255, 255, 0.2);
 }
 
 #clearBtn {
-    background-color: #fc8181;
+    background: rgba(252, 129, 129, 0.2);
     color: white;
-    box-shadow: 0 4px 15px rgba(252, 129, 129, 0.4);
+    border: 2px solid rgba(255, 255, 255, 0.2);
 }
 
 #solveBtn:hover, #clearBtn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.3);
+    box-shadow: 
+        0 15px 35px rgba(0,0,0,0.2),
+        0 0 25px rgba(255,255,255,0.1);
 }
 
-#solveBtn:active, #clearBtn:active {
-    transform: translateY(0);
-}
-
-/* Enhance dot styling */
+/* Dot Styling */
 .dot {
     width: 8px;
     height: 8px;
     border-radius: 50%;
     position: absolute;
     cursor: pointer;
-    background-color: #e2e8f0;
+    z-index: 3;
     transition: all 0.2s ease;
-    z-index: 2;
+    background-color: #e2e8f0;
 }
 
-.dot:hover {
-    transform: scale(1.2);
-    box-shadow: 0 0 5px rgba(0,0,0,0.2);
+.dot.horizontal {
+    right: -5px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.dot.vertical {
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 .dot.black-dot {
     background-color: #2d3748;
     border: 1px solid white;
-    box-shadow: 0 0 5px rgba(0,0,0,0.3);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
 }
 
 .dot.white-dot {
     background-color: white;
-    border: 2px solid #2d3748;
-    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+    border: 1px solid #2d3748;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.dot:hover {
+    transform: scale(1.5) translateY(-50%);
+}
+
+.dot.vertical:hover {
+    transform: scale(1.5) translateX(-50%);
+}
+
+/* Adjust for thicker borders */
+td:nth-child(3n) .dot.horizontal {
+    right: -6px;
+}
+
+tr:nth-child(3n) .dot.vertical {
+    bottom: -6px;
 }
 
 .instructions {
@@ -317,124 +363,62 @@ input:focus {
     justify-content: center;
     min-height: 100vh;
     padding: 20px;
+    gap: 30px;
     max-width: 1200px;
     margin: 0 auto;
+    transform: translateY(-5vh); /* Move content slightly up */
 }
 
-/* Adjust controls position */
+/* Update controls spacing */
 .controls {
-    margin-bottom: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 25px 35px;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    width: fit-content;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    transform: translateZ(25px);
+    margin: 0; /* Remove margin, use gap instead */
 }
 
-/* Disable inputs while solving */
-.solving input {
-    pointer-events: none;
-    opacity: 0.7;
+/* Add page transition animations */
+.solver-section {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
-.solving .dot {
-    pointer-events: none;
+.solver-section.visible {
+    opacity: 1;
+    transform: translateY(0);
 }
 
-#solveBtn {
-    background-color: #28a745;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    padding: 12px 24px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
+.landing-section {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
-#solveBtn:hover {
-    background-color: #218838;
+.landing-section.hiding {
+    opacity: 0;
+    transform: translateY(-20px);
 }
 
-.solving {
-    cursor: wait;
+@keyframes gradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }
 
-#solveBtn.solving {
-    background-color: #6c757d;
-    position: relative;
-    overflow: hidden;
-}
-
-.progress-bar {
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    height: 4px;
-    background-color: #28a745;
-    transition: width 0.3s ease;
-}
-
-/* Clear button styling */
-#clearBtn {
-    background-color: #dc3545;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    padding: 12px 24px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-    margin-left: 10px;
-}
-
-#clearBtn:hover {
-    background-color: #c82333;
-}
-
-#clearBtn:active {
-    transform: scale(0.98);
-}
-
-/* Add smooth scrollbar for instructions */
-.instructions::-webkit-scrollbar {
-    width: 6px;
-}
-
-.instructions::-webkit-scrollbar-track {
-    background: #f7fafc;
-}
-
-.instructions::-webkit-scrollbar-thumb {
-    background: #cbd5e0;
-    border-radius: 3px;
-}
-
-.instructions::-webkit-scrollbar-thumb:hover {
-    background: #a0aec0;
-}
-
-/* Add icons to instructions button */
-#instructionsBtn::before {
-    content: "📖";
-    margin-right: 8px;
-}
-
-/* Adjust dot positions accounting for thicker borders */
-.dot.horizontal {
-    left: 100%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 3;
-}
-
-.dot.vertical {
-    left: 50%;
-    top: 100%;
-    transform: translate(-50%, -50%);
-    z-index: 3;
-}
-
-/* Adjust dots at 3x3 box borders */
-td:nth-child(3n) .dot.horizontal {
-    left: calc(100% + 1px); /* Compensate for thicker border */
-}
-
-tr:nth-child(3n) .dot.vertical {
-    top: calc(100% + 1px); /* Compensate for thicker border */
+/* Prevent text selection across the entire app */
+* {
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
 }

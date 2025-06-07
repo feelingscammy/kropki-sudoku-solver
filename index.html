@@ -15,6 +15,8 @@
             <div class="decoration-dot white"></div>
             <div class="decoration-dot black"></div>
             <div class="decoration-dot white"></div>
+            <div class="decoration-dot black"></div>
+            <div class="decoration-dot white"></div>
         </div>
         <div class="container">
             <h1 class="title">Kropki Sudoku Solver</h1>
@@ -34,7 +36,9 @@
                 <button class="dot-selector" id="noDot">❌ Remove Dot</button>
             </div>
 
-            <table id="grid"></table>
+            <div class="table-wrapper">
+                <table id="grid"></table>
+            </div>
             
             <div class="button-group">
                 <button id="solveBtn">Solve Puzzle</button>
@@ -74,6 +78,13 @@
             document.getElementById('landing').style.display = 'none';
             document.getElementById('solver').style.display = 'block';
         }
+
+        document.addEventListener('mousemove', (e) => {
+            const x = e.clientX / window.innerWidth * 100;
+            const y = e.clientY / window.innerHeight * 100;
+            document.documentElement.style.setProperty('--mouse-x', x + '%');
+            document.documentElement.style.setProperty('--mouse-y', y + '%');
+        });
     </script>
     <script src="script.js"></script>
 </body>

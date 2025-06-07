@@ -265,3 +265,23 @@ document.addEventListener('DOMContentLoaded', () => {
         instructionsBtn.classList.remove('open');
     });
 });
+
+function showSolver() {
+    const landing = document.getElementById('landing');
+    const solver = document.getElementById('solver');
+    
+    // Add hiding class to landing for fade out
+    landing.classList.add('hiding');
+    
+    // Show solver after short delay
+    setTimeout(() => {
+        landing.style.display = 'none';
+        solver.style.display = 'block';
+        
+        // Force a reflow before adding visible class
+        void solver.offsetWidth;
+        
+        // Add visible class for fade in
+        solver.classList.add('visible');
+    }, 600);
+}

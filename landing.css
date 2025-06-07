@@ -2,8 +2,10 @@ body {
     margin: 0;
     padding: 0;
     min-height: 100vh;
-    font-family: 'Arial Rounded MT Bold', 'Helvetica Rounded', Arial, sans-serif;
-    background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: linear-gradient(-45deg, #0A2463, #3E92CC, #1B4EA8, #2E6BBE);
+    background-size: 400% 400%;
+    animation: gradient 15s ease infinite;
     overflow: hidden;
 }
 
@@ -15,43 +17,94 @@ body {
     height: 100vh;
     text-align: center;
     padding: 20px;
+    position: relative;
+    z-index: 2;
+    perspective: 2000px;
+    transform-style: preserve-3d;
 }
 
 .title {
-    font-size: 4em;
-    color: #2d3748;
+    font-size: 5em;
+    font-weight: 800;
+    letter-spacing: -2px;
+    color: white;
     margin-bottom: 20px;
-    text-shadow: 3px 3px 0px rgba(0,0,0,0.1);
-    animation: bounce 1s ease infinite;
+    transform: translateZ(100px);
+    text-shadow: 
+        0 5px 15px rgba(0,0,0,0.2),
+        0 15px 35px rgba(0,0,0,0.1);
+    opacity: 0;
+    animation: fade-in-title 1s ease forwards;
 }
 
 .subtitle {
     font-size: 1.5em;
-    color: #4a5568;
+    color: rgba(255,255,255,0.9);
     margin-bottom: 40px;
+    font-weight: 400;
+    transform: translateZ(50px);
+    opacity: 0;
+    animation: fade-up 0.8s ease forwards 0.5s;
+}
+
+.subtitle a {
+    color: #90CDF4;
+    text-decoration: none;
+    position: relative;
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+.subtitle a:hover {
+    color: #BEE3F8;
+    text-shadow: 0 0 15px rgba(144, 205, 244, 0.5);
 }
 
 .start-button {
-    padding: 15px 40px;
+    padding: 18px 48px;
     font-size: 1.2em;
-    background-color: #4299e1;
+    font-weight: 600;
+    background: rgba(255, 255, 255, 0.1);
     color: white;
-    border: none;
+    border: 2px solid rgba(255, 255, 255, 0.2);
     border-radius: 50px;
     cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(66, 153, 225, 0.4);
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    backdrop-filter: blur(10px);
+    transform: translateZ(75px);
+    opacity: 0;
+    animation: fade-up 0.8s ease forwards 0.8s;
     position: relative;
     overflow: hidden;
 }
 
-.start-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(66, 153, 225, 0.6);
+.start-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        120deg,
+        transparent,
+        rgba(255, 255, 255, 0.3),
+        transparent
+    );
+    transition: 0.5s;
 }
 
-.start-button:active {
-    transform: translateY(0);
+.start-button:hover {
+    transform: translateZ(100px) scale(1.05);
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.3);
+    box-shadow: 
+        0 15px 35px rgba(0,0,0,0.2),
+        0 0 25px rgba(255,255,255,0.1);
+}
+
+.start-button:hover::before {
+    left: 100%;
 }
 
 .dots-decoration {
@@ -59,6 +112,7 @@ body {
     width: 100%;
     height: 100%;
     pointer-events: none;
+    z-index: 1;
 }
 
 .decoration-dot {
@@ -66,31 +120,103 @@ body {
     width: 20px;
     height: 20px;
     border-radius: 50%;
-    animation: float 3s ease-in-out infinite;
+    opacity: 0;
+    animation: float 7s ease-in-out infinite, fade-in 0.5s ease forwards;
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
 }
 
 .decoration-dot.black {
-    background-color: rgba(0, 0, 0, 0.8);
-    border: 2px solid white;
+    background: rgba(0, 0, 0, 0.3);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
 }
 
 .decoration-dot.white {
-    background-color: white;
-    border: 2px solid black;
+    background: rgba(255, 255, 255, 0.15);
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+}
+
+/* Add more dot positions for better coverage */
+.dots-decoration .decoration-dot:nth-child(1) { 
+    top: 15%; left: 15%; 
+    animation-delay: 0s;
+    --float-x: -35px;
+    --float-y: -25px;
+}
+.dots-decoration .decoration-dot:nth-child(2) { 
+    top: 25%; right: 25%; 
+    animation-delay: 0.7s;
+    --float-x: 30px;
+    --float-y: -30px;
+}
+.dots-decoration .decoration-dot:nth-child(3) { 
+    bottom: 20%; left: 30%; 
+    animation-delay: 1.4s;
+    --float-x: -25px;
+    --float-y: 35px;
+}
+.dots-decoration .decoration-dot:nth-child(4) { 
+    bottom: 30%; right: 20%; 
+    animation-delay: 2.1s;
+    --float-x: 35px;
+    --float-y: 30px;
+}
+.dots-decoration .decoration-dot:nth-child(5) { 
+    top: 40%; left: 80%; 
+    animation-delay: 1.1s;
+    --float-x: -40px;
+    --float-y: 20px;
+}
+.dots-decoration .decoration-dot:nth-child(6) { 
+    bottom: 40%; left: 10%; 
+    animation-delay: 1.8s;
+    --float-x: 20px;
+    --float-y: -40px;
+}
+
+@keyframes gradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+@keyframes fade-in-title {
+    from { 
+        opacity: 0;
+        transform: translateZ(0) translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateZ(100px) translateY(0);
+    }
+}
+
+@keyframes fade-up {
+    from { 
+        opacity: 0;
+        transform: translateZ(0) translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateZ(75px) translateY(0);
+    }
 }
 
 @keyframes float {
-    0%, 100% { transform: translateY(0) rotate(0deg); }
-    50% { transform: translateY(-20px) rotate(180deg); }
+    0% { 
+        transform: translate3d(0, 0, 50px) rotate(0deg); 
+    }
+    50% { 
+        transform: translate3d(var(--float-x, -30px), var(--float-y, -30px), 100px) rotate(180deg); 
+    }
+    100% { 
+        transform: translate3d(0, 0, 50px) rotate(360deg); 
+    }
 }
 
-@keyframes bounce {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
+@keyframes fade-in {
+    from { opacity: 0; }
+    to { opacity: 0.8; }
 }
-
-/* Add some random positioned dots */
-.dots-decoration .decoration-dot:nth-child(1) { top: 10%; left: 10%; animation-delay: 0s; }
-.dots-decoration .decoration-dot:nth-child(2) { top: 20%; right: 20%; animation-delay: 0.5s; }
-.dots-decoration .decoration-dot:nth-child(3) { bottom: 15%; left: 25%; animation-delay: 1s; }
-.dots-decoration .decoration-dot:nth-child(4) { bottom: 25%; right: 15%; animation-delay: 1.5s; }
