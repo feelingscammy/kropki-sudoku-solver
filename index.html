@@ -39,6 +39,22 @@
                 <button class="dot-selector" id="noDot">❌ Remove Dot</button>
             </div>
 
+            <div class="generator-controls">
+                <select id="sudokuType">
+                    <option value="kropki">Kropki Sudoku</option>
+                    <option value="normal">Normal Sudoku</option>
+                </select>
+                <select id="difficulty">
+                    <option value="easy">Easy</option>
+                    <option value="medium">Medium</option>
+                    <option value="hard">Hard</option>
+                    <option value="expert">Expert</option>
+                    <option value="master">Crazy Bomboclat</option>
+                </select>
+                <button id="generateBtn">Generate Puzzle</button>
+                <button id="checkBtn">Check Solution</button>
+            </div>
+
             <div class="table-wrapper">
                 <table id="grid"></table>
             </div>
