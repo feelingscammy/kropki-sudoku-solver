@@ -587,17 +587,27 @@ tr:nth-child(3n) .dot.vertical {
 }
 
 .generator-controls select:hover {
-    background: rgba(255, 255, 255, 0.2);
+    background: #4299e1;
 }
 
 #generateBtn {
     background: rgba(66, 225, 161, 0.2);
     color: white;
     border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    
 }
 
 #checkBtn {
     background: rgba(66, 153, 225, 0.2);
     color: white;
     border: 2px solid rgba(255, 255, 255, 0.2);
+    cursor: pointer;
+    border-radius: 8px;
+}
+
+#generateBtn:hover, #checkBtn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    cursor: pointer;
+    transition: all 0.3s ease;
 }
