@@ -37,7 +37,7 @@ table {
     border-collapse: collapse;
     border: 2px solid rgba(45, 55, 72, 0.9);
     border-radius: 8px;
-    box-shadow: 
+    box-shadow:
         0 10px 30px rgba(0, 0, 0, 0.1),
         0 0 0 1px rgba(255, 255, 255, 0.1);
     transform: translateZ(50px);
@@ -53,7 +53,7 @@ table {
     border-radius: 20px;
     background: rgba(255, 255, 255, 0.12);
     backdrop-filter: blur(20px);
-    box-shadow: 
+    box-shadow:
         0 15px 35px rgba(0, 0, 0, 0.2),
         0 0 0 1px rgba(255, 255, 255, 0.1);
 }
@@ -183,7 +183,7 @@ td:hover {
     transform: translateY(-2px);
     background: rgba(255, 255, 255, 0.2);
     border-color: rgba(255, 255, 255, 0.3);
-    box-shadow: 
+    box-shadow:
         0 15px 35px rgba(0,0,0,0.2),
         0 0 25px rgba(255,255,255,0.1);
 }
@@ -440,7 +440,7 @@ tr:nth-child(3n) .dot.vertical {
     table {
         transform: scale(0.9);
         margin: 0 auto;
-        width: auto; 
+        width: auto;
     }
 
     td {
@@ -595,7 +595,7 @@ tr:nth-child(3n) .dot.vertical {
     color: white;
     border: 2px solid rgba(255, 255, 255, 0.2);
     border-radius: 8px;
-    
+
 }
 
 #checkBtn {

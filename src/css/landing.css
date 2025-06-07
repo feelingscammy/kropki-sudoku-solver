@@ -30,7 +30,7 @@ body {
     color: white;
     margin-bottom: 20px;
     transform: translateZ(100px);
-    text-shadow: 
+    text-shadow:
         0 5px 15px rgba(0,0,0,0.2),
         0 15px 35px rgba(0,0,0,0.1);
     opacity: 0;
@@ -98,7 +98,7 @@ body {
     transform: translateZ(100px) scale(1.05);
     background: rgba(255, 255, 255, 0.2);
     border-color: rgba(255, 255, 255, 0.3);
-    box-shadow: 
+    box-shadow:
         0 15px 35px rgba(0,0,0,0.2),
         0 0 25px rgba(255,255,255,0.1);
 }
@@ -139,38 +139,38 @@ body {
 }
 
 /* Add more dot positions for better coverage */
-.dots-decoration .decoration-dot:nth-child(1) { 
-    top: 15%; left: 15%; 
+.dots-decoration .decoration-dot:nth-child(1) {
+    top: 15%; left: 15%;
     animation-delay: 0s;
     --float-x: -35px;
     --float-y: -25px;
 }
-.dots-decoration .decoration-dot:nth-child(2) { 
-    top: 25%; right: 25%; 
+.dots-decoration .decoration-dot:nth-child(2) {
+    top: 25%; right: 25%;
     animation-delay: 0.7s;
     --float-x: 30px;
     --float-y: -30px;
 }
-.dots-decoration .decoration-dot:nth-child(3) { 
-    bottom: 20%; left: 30%; 
+.dots-decoration .decoration-dot:nth-child(3) {
+    bottom: 20%; left: 30%;
     animation-delay: 1.4s;
     --float-x: -25px;
     --float-y: 35px;
 }
-.dots-decoration .decoration-dot:nth-child(4) { 
-    bottom: 30%; right: 20%; 
+.dots-decoration .decoration-dot:nth-child(4) {
+    bottom: 30%; right: 20%;
     animation-delay: 2.1s;
     --float-x: 35px;
     --float-y: 30px;
 }
-.dots-decoration .decoration-dot:nth-child(5) { 
-    top: 40%; left: 80%; 
+.dots-decoration .decoration-dot:nth-child(5) {
+    top: 40%; left: 80%;
     animation-delay: 1.1s;
     --float-x: -40px;
     --float-y: 20px;
 }
-.dots-decoration .decoration-dot:nth-child(6) { 
-    bottom: 40%; left: 10%; 
+.dots-decoration .decoration-dot:nth-child(6) {
+    bottom: 40%; left: 10%;
     animation-delay: 1.8s;
     --float-x: 20px;
     --float-y: -40px;
@@ -183,7 +183,7 @@ body {
 }
 
 @keyframes fade-in-title {
-    from { 
+    from {
         opacity: 0;
         transform: translateZ(0) translateY(-20px);
     }
@@ -194,7 +194,7 @@ body {
 }
 
 @keyframes fade-up {
-    from { 
+    from {
         opacity: 0;
         transform: translateZ(0) translateY(20px);
     }
@@ -205,14 +205,14 @@ body {
 }
 
 @keyframes float {
-    0% { 
-        transform: translate3d(0, 0, 50px) rotate(0deg); 
+    0% {
+        transform: translate3d(0, 0, 50px) rotate(0deg);
     }
-    50% { 
-        transform: translate3d(var(--float-x, -30px), var(--float-y, -30px), 100px) rotate(180deg); 
+    50% {
+        transform: translate3d(var(--float-x, -30px), var(--float-y, -30px), 100px) rotate(180deg);
     }
-    100% { 
-        transform: translate3d(0, 0, 50px) rotate(360deg); 
+    100% {
+        transform: translate3d(0, 0, 50px) rotate(360deg);
     }
 }
 
