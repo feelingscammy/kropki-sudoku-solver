@@ -4,12 +4,25 @@ document.addEventListener('DOMContentLoaded', () => {
                         document.getElementById('instructions-container');
     const closeInstructionsBtn = document.querySelector('.close-instructions');
 
+    const body = document.body;
+    const overlay = document.createElement('div');
+
+    overlay.className = 'instructions-overlay';
+    body.appendChild(overlay);
+
     instructionsBtn?.addEventListener('click', () => {
-        instructions?.classList.add('open');
+        instructions?.classList.toggle('open');
+        overlay.classList.toggle('active');
+    });
+
+    overlay.addEventListener('click', () => {
+        instructions?.classList.remove('open');
+        overlay.classList.remove('active');
     });
 
     closeInstructionsBtn?.addEventListener('click', () => {
         instructions?.classList.remove('open');
+        overlay.classList.remove('active');
     });
 
     if (instructions) {
@@ -74,7 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
         } catch (error) {
             console.error('Solver error:', error);
             alert('An error occurred while solving.');        }
-    });    // Check solution button handler
+    });
     document.getElementById('checkBtn')?.addEventListener('click', () => {
         if (!window.currentSolution) {
             alert('No puzzle has been generated yet!');
@@ -97,7 +110,6 @@ document.addEventListener('DOMContentLoaded', () => {
                         isValid = false;
                         break;
                     }
-                    // Temporarily remove the number and check if it's valid
                     currentGrid[i][j] = 0;
                     isValid = solver.isValid(i, j, currentValue);
                     currentGrid[i][j] = currentValue;
@@ -148,5 +160,43 @@ document.addEventListener('DOMContentLoaded', () => {
         input.addEventListener('paste', e => e.preventDefault());
         input.addEventListener('drop', e => e.preventDefault());
         input.addEventListener('dragstart', e => e.preventDefault());
+    });
+
+    const menuToggle = document.querySelector('.menu-toggle');
+    const sideMenu = document.querySelector('.side-menu');
+
+    if (menuToggle && sideMenu) {
+        if (window.innerWidth <= 1024) {
+            sideMenu.classList.remove('active');
+        }
+
+        menuToggle.addEventListener('click', (e) => {
+            e.stopPropagation();
+            sideMenu.classList.toggle('active');
+        });
+
+        document.addEventListener('click', (e) => {
+            if (window.innerWidth <= 1024 &&
+                sideMenu.classList.contains('active') &&
+                !sideMenu.contains(e.target) &&
+                !menuToggle.contains(e.target)) {
+                sideMenu.classList.remove('active');
+            }
+        });
+
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 1024) {
+                sideMenu.classList.remove('active');
+            }
+        });
+    }
+
+    document.querySelectorAll('.dot-selector').forEach(button => {
+        button.addEventListener('click', () => {
+            document.querySelectorAll('.dot-selector').forEach(btn => {
+                btn.classList.remove('selected');
+            });
+            button.classList.add('selected');
+        });
     });
 });

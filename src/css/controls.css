@@ -135,7 +135,6 @@ body.game-active .side-menu {
     margin-bottom: 8px;    backdrop-filter: blur(10px);
 }
 
-/* Firefox-specific styles moved to firefox.css */
 
 /* Dropdown styling for options */
 .generator-options select option {
@@ -201,22 +200,78 @@ body.game-active .side-menu {
     background: rgba(255, 255, 255, 0.2);
 }
 
-/* Responsive Styles */
+/* Selected dot state */
+.dot-selector.selected {
+    background: linear-gradient(135deg, rgba(66, 153, 225, 0.3), rgba(56, 189, 248, 0.3));
+    border-color: rgba(255, 255, 255, 0.4);
+    box-shadow:
+        inset 0 0 15px rgba(255, 255, 255, 0.1),
+        0 5px 15px rgba(0, 0, 0, 0.2);
+    transform: translateY(-1px);
+}
+
+.dot-selector.selected:hover {
+    transform: translateY(-1px);
+    background: linear-gradient(135deg, rgba(66, 153, 225, 0.4), rgba(56, 189, 248, 0.4));
+}
+
+/* Mobile optimization */
+@media screen and (max-width: 768px) {
+    .dot-selector.selected {
+        background: rgba(66, 153, 225, 0.3);
+        box-shadow: none;
+    }
+}
+
+/* Mobile-specific styles */
 @media screen and (max-width: 1024px) {
     .side-menu {
+        position: fixed;
         transform: translateX(100%);
+        width: 100%;
+        height: 100vh;
+        background: #1e293b;
+        padding: 20px;
+        visibility: hidden;
+        opacity: 0;
+        transition: all 0.3s ease;
+        z-index: 1000;
     }
 
     .side-menu.active {
         transform: translateX(0);
+        visibility: visible;
+        opacity: 1;
+    }
+
+    body.game-active .side-menu {
+        transform: translateX(100%);
+        opacity: 0;
+        visibility: hidden;
+    }
+
+    body.game-active .side-menu.active {
+        transform: translateX(0);
+        opacity: 1;
+        visibility: visible;
     }
 
     .menu-toggle {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        width: 44px;
+        height: 44px;
         display: flex;
-    }
-
-    .side-menu.active ~ .menu-toggle {
-        transform: translateX(-300px);
+        align-items: center;
+        justify-content: center;
+        background: #1e293b;
+        border: 2px solid rgba(255, 255, 255, 0.2);
+        border-radius: 8px;
+        color: white;
+        font-size: 24px;
+        cursor: pointer;
+        z-index: 1001;
     }
 }
 
@@ -224,6 +279,8 @@ body.game-active .side-menu {
     .section {
         padding: 15px;
         gap: 10px;
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: none;
     }
 
     .grid-action,
@@ -233,14 +290,14 @@ body.game-active .side-menu {
     #clearBtn {
         padding: 10px 20px;
         font-size: 14px;
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: none;
     }
 
     .side-menu {
         width: 100%;
-    }
-
-    .side-menu.active ~ .menu-toggle {
-        transform: translateX(-100%);
+        background: #1e293b;
+        backdrop-filter: none;
     }
 }
 
@@ -254,5 +311,11 @@ body.game-active .side-menu {
     #clearBtn {
         width: 100%;
         margin: 0;
+    }
+
+    .generator-options select,
+    .action-buttons button {
+        width: 100%;
+        margin-bottom: 8px;
     }
 }

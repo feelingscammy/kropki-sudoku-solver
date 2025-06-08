@@ -140,7 +140,8 @@
 
     .instructions.open {
         left: 50%;
-        bottom: 0;
+        bottom: 25%;
+        border-radius: 25px;
     }
 
     #instructionsBtn {
