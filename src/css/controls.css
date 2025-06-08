@@ -1,187 +1,209 @@
-/* Controls Styling */
-.controls {
-    background: rgba(255, 255, 255, 0.1);
-    padding: 30px 40px;
-    border-radius: 15px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    width: fit-content;
-    display: flex;
-    justify-content: center;
-    gap: 25px;
-    flex-wrap: wrap;
-    backdrop-filter: blur(10px);
-    border: 2px solid rgba(255, 255, 255, 0.2);
-    transform: translateZ(25px);
-    margin: 0 auto;
-}
-
-.dot-selector {
+/* Shared Button Styles */
+.grid-action,
+.dot-selector,
+.action-buttons button,
+.generator-options select,
+#solveBtn,
+#clearBtn,
+#generateBtn,
+#checkBtn {
     padding: 12px 24px;
-    margin: 0;
     border: 2px solid rgba(255, 255, 255, 0.2);
-    border-radius: 12px;
+    border-radius: 20px;
     background: rgba(255, 255, 255, 0.1);
-    cursor: pointer;
-    font-weight: 600;
     color: white;
-}
-
-.dot-selector:hover {
-    transform: translateY(-2px);
-    background: rgba(255, 255, 255, 0.2);
-    border-color: rgba(255, 255, 255, 0.3);
-}
-
-.dot-selector.selected {
-    background: rgba(66, 153, 225, 0.3);
-    border-color: rgba(144, 205, 244, 0.5);
-    color: white;
-}
-
-/* Game Controls */
-.button-group {
-    display: flex;
-    gap: 10px;
-}
-
-#solveBtn, #clearBtn {
-    padding: 12px 28px;
-    font-size: 16px;
-    font-weight: 600;
-    border: none;
-    border-radius: 50px;
     cursor: pointer;
-    margin: 0 10px;
+    transition: all 0.2s ease;
+    font-weight: 600;
     backdrop-filter: blur(10px);
-    position: relative;
-    overflow: hidden;
 }
 
-#solveBtn {
-    background: rgba(66, 225, 161, 0.2);
-    color: white;
-    border: 2px solid rgba(255, 255, 255, 0.2);
-}
+/* Button specific styles */
+#solveBtn { background: rgba(66, 225, 161, 0.2); }
+#clearBtn { background: rgba(243, 49, 49, 0.2); }
+#generateBtn { background: rgba(66, 225, 161, 0.2); }
+#checkBtn { background: rgba(66, 153, 225, 0.2); }
 
-#clearBtn {
-    background: rgba(243, 49, 49, 0.251);
-    color: white;
-    border: 2px solid rgba(255, 255, 255, 0.2);
-}
-
-#solveBtn:hover, #clearBtn:hover {
-    transform: translateY(-2px);
+/* Hover effects */
+.grid-action:hover,
+.dot-selector:hover,
+.action-buttons button:hover,
+.generator-options select:hover,
+#solveBtn:hover,
+#clearBtn:hover,
+#generateBtn:hover,
+#checkBtn:hover {
+    transform: translateY(-1.5px);
     background: rgba(255, 255, 255, 0.2);
     border-color: rgba(255, 255, 255, 0.3);
     box-shadow:
-        0 15px 35px rgba(0,0,0,0.2),
+        0 10px 35px rgba(0,0,0,0.2),
         0 0 25px rgba(255,255,255,0.1);
 }
 
-/* Generator Controls */
-.generator-controls {
-    background: rgba(255, 255, 255, 0.1);
-    padding: 20px 30px;
-    border-radius: 15px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    width: fit-content;
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    flex-wrap: wrap;
+/* Side Menu */
+.side-menu {
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100vh;
+    width: 300px;
+    background: rgba(255, 255, 255, 0.032);
     backdrop-filter: blur(10px);
-    border: 2px solid rgba(255, 255, 255, 0.2);
-    transform: translateZ(25px);
-    margin-bottom: 20px;
+    border-left: 2px solid rgba(255, 255, 255, 0.2);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+    overflow-y: auto;
+    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    transform: translateX(100%);
+    opacity: 0;
+    visibility: hidden;
+    transition-property: transform, opacity, visibility;
+    transition-duration: 0.3s;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform;
 }
 
-.generator-controls select {
-    padding: 8px 16px;
-    border-radius: 8px;
-    border: 2px solid rgba(255, 255, 255, 0.2);
-    background: rgba(255, 255, 255, 0.1);
+body.game-active .side-menu {
+    transform: translateX(0);
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Side Menu Content */
+.side-menu-header {
+    font-size: 1.5em;
     color: white;
-    font-size: 14px;
-    cursor: pointer;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    padding-right: 24px; /* Space for custom arrow */
+    font-weight: 600;
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+    text-align: center;
+}
+
+.section {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 12px;
+    border-radius: 12px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    backdrop-filter: blur(5px);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    margin-bottom: 15px;
+}
+
+.section-title {
+    font-size: 1.2em;
+    color: white;
+    font-weight: 800;
+    margin: auto;
+    text-align: center;
+}
+
+/* Control Groups */
+.dot-controls,
+.generator-options,
+.action-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+}
+
+/* Select Styling */
+.generator-options select {
+    padding-right: 24px;
     background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3e%3cpath d='M7 10l5 5 5-5z'/%3e%3c/svg%3e");
     background-repeat: no-repeat;
     background-position: right 8px center;
     background-size: 16px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
 }
 
-.generator-controls select:hover {
-    background: #4299e1;
-}
-
-#generateBtn, #checkBtn {
-    padding: 8px 16px;
+/* Menu Toggle */
+.menu-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 44px;
+    height: 44px;
+    background: rgba(255, 255, 255, 0.15);
+    border: 2px solid rgba(255, 255, 255, 0.2);
     border-radius: 8px;
     color: white;
-    border: 2px solid rgba(255, 255, 255, 0.2);
+    font-size: 24px;
     cursor: pointer;
+    z-index: 1001;
+    backdrop-filter: blur(10px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
 }
 
-#generateBtn {
-    background: rgba(66, 225, 161, 0.2);
-}
-
-#checkBtn {
-    background: rgba(66, 153, 225, 0.2);
-}
-
-#generateBtn:hover, #checkBtn:hover {
+.menu-toggle:hover {
     background: rgba(255, 255, 255, 0.2);
 }
 
-/* Responsive Controls */
+/* Responsive Styles */
+@media screen and (max-width: 1024px) {
+    .side-menu {
+        transform: translateX(100%);
+    }
+
+    .side-menu.active {
+        transform: translateX(0);
+    }
+
+    .menu-toggle {
+        display: flex;
+    }
+
+    .side-menu.active ~ .menu-toggle {
+        transform: translateX(-300px);
+    }
+}
+
 @media screen and (max-width: 768px) {
-    .controls {
-        padding: 15px 20px;
-        gap: 12px;
-        margin: 0 15px;
-        width: auto;
-        max-width: calc(100% - 30px);
+    .section {
+        padding: 15px;
+        gap: 10px;
     }
 
-    .dot-selector {
-        padding: 8px 16px;
-        font-size: 14px;
-    }
-
-    #solveBtn, #clearBtn {
+    .grid-action,
+    .dot-selector,
+    .action-buttons button,
+    #solveBtn,
+    #clearBtn {
         padding: 10px 20px;
         font-size: 14px;
+    }
+
+    .side-menu {
+        width: 100%;
+    }
+
+    .side-menu.active ~ .menu-toggle {
+        transform: translateX(-100%);
     }
 }
 
 @media screen and (max-width: 480px) {
-    .controls {
-        padding: 12px 15px;
-        margin: 0 10px;
+    .section {
+        padding: 12px;
     }
 
-    .dot-selector {
-        width: 100%;
-        text-align: center;
-    }
-
-    .button-group {
-        flex-direction: column;
-        gap: 10px;
-    }
-
-    #solveBtn, #clearBtn {
+    .grid-action,
+    #solveBtn,
+    #clearBtn {
         width: 100%;
         margin: 0;
-    }
-}
-
-@media screen and (max-height: 600px) and (orientation: landscape) {
-    .controls {
-        padding: 10px;
     }
 }

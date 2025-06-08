@@ -30,38 +30,48 @@
         </div>
     </div>
 
-    <!-- Solver section -->
-    <div id="solver" class="solver-section" style="display: none;">
+    <!-- Solver section -->    <div id="solver" class="solver-section" style="display: none;">
         <div class="main-content">
-            <div class="controls">
-                <button class="dot-selector" id="blackDot">⚫ Black Dot</button>
-                <button class="dot-selector" id="whiteDot">⚪ White Dot</button>
-                <button class="dot-selector" id="noDot">❌ Remove Dot</button>
-            </div>
-
-            <div class="generator-controls">
-                <select id="sudokuType">
-                    <option value="kropki">Kropki Sudoku</option>
-                    <option value="normal">Normal Sudoku</option>
-                </select>
-                <select id="difficulty">
-                    <option value="easy">Easy</option>
-                    <option value="medium">Medium</option>
-                    <option value="hard">Hard</option>
-                    <option value="expert">Expert</option>
-                    <option value="master">Crazy Bomboclat</option>
-                </select>
-                <button id="generateBtn">Generate Puzzle</button>
-                <button id="checkBtn">Check Solution</button>
-            </div>
-
             <div class="table-wrapper">
                 <table id="grid"></table>
             </div>
+            <div class="grid-controls">
+                <button id="solveBtn" class="grid-action">Solve Puzzle</button>
+                <button id="clearBtn" class="grid-action">Clear Grid</button>
+            </div>
+        </div>
 
-            <div class="button-group">
-                <button id="solveBtn">Solve Puzzle</button>
-                <button id="clearBtn">Clear Grid</button>
+        <!-- Side Menu -->
+        <div class="side-menu">
+            <div class="side-menu-header">Game Controls</div>
+
+            <div class="controls section">
+                <div class="section-title">Kropki Solver</div>
+                <div class="dot-controls">
+                    <button class="dot-selector" id="blackDot">⚫ Black Dot</button>
+                    <button class="dot-selector" id="whiteDot">⚪ White Dot</button>
+                    <button class="dot-selector" id="noDot">❌ Remove Dot</button>
+                </div>
+            </div>
+
+            <div class="generator-controls section">
+                <div class="section-title">Sudoku Generator</div>
+                <div class="generator-options">
+                    <select id="sudokuType">
+                        <option value="kropki">Kropki Sudoku</option>
+                        <option value="normal">Normal Sudoku</option>
+                    </select>
+                    <select id="difficulty">
+                        <option value="easy">Easy</option>
+                        <option value="medium">Medium</option>
+                        <option value="hard">Hard</option>
+                        <option value="expert">Expert</option>
+                        <option value="master">Crazy Bomboclat</option>
+                    </select>
+                </div>                <div class="action-buttons">
+                    <button id="generateBtn">Generate Puzzle</button>
+                    <button id="checkBtn">Check Solution</button>
+                </div>
             </div>
         </div>
 

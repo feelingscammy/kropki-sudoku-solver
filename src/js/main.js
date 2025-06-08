@@ -81,13 +81,18 @@ function showSolver() {
 
     if (landing && solver) {
         landing.classList.add('hiding');
+        // Force a reflow to ensure smooth transition
+        void landing.offsetWidth;
+
         setTimeout(() => {
             landing.style.display = 'none';
             solver.style.display = 'block';
+            // Force a reflow before adding visible class
             void solver.offsetWidth;
             solver.classList.add('visible');
+            document.body.classList.add('game-active');
             initializeGrid(); // Initialize grid after showing solver
-        }, 600);
+        }, 300);
     } else {
         console.error('Landing or solver elements not found');
     }
@@ -134,4 +139,31 @@ document.addEventListener('DOMContentLoaded', () => {
             instructions?.classList.remove('open');
         }
     });
+});
+
+function showSolver() {
+    const landing = document.getElementById('landing');
+    const solver = document.getElementById('solver');
+
+    if (landing && solver) {
+        landing.classList.add('hiding');
+        setTimeout(() => {
+            landing.style.display = 'none';
+            solver.style.display = 'block';
+            // Force a reflow before adding visible class
+            void solver.offsetWidth;
+            solver.classList.add('visible');
+            document.body.classList.add('game-active');
+            // Initialize grid after showing solver
+            initializeGrid();
+        }, 300);
+    }
+}
+
+// Add event listener for start button
+document.addEventListener('DOMContentLoaded', () => {
+    const startButton = document.querySelector('.start-button');
+    if (startButton) {
+        startButton.addEventListener('click', startGame);
+    }
 });

@@ -17,7 +17,11 @@ body {
     height: 100vh;
     text-align: center;
     padding: 20px;
-    position: relative;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
     z-index: 2;
     perspective: 2000px;
     transform-style: preserve-3d;
@@ -176,47 +180,4 @@ body {
     --float-y: -40px;
 }
 
-@keyframes gradient {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
-
-@keyframes fade-in-title {
-    from {
-        opacity: 0;
-        transform: translateZ(0) translateY(-20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateZ(100px) translateY(0);
-    }
-}
-
-@keyframes fade-up {
-    from {
-        opacity: 0;
-        transform: translateZ(0) translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateZ(75px) translateY(0);
-    }
-}
-
-@keyframes float {
-    0% {
-        transform: translate3d(0, 0, 50px) rotate(0deg);
-    }
-    50% {
-        transform: translate3d(var(--float-x, -30px), var(--float-y, -30px), 100px) rotate(180deg);
-    }
-    100% {
-        transform: translate3d(0, 0, 50px) rotate(360deg);
-    }
-}
-
-@keyframes fade-in {
-    from { opacity: 0; }
-    to { opacity: 0.8; }
-}
+/* Moved keyframe animations to animations.css */

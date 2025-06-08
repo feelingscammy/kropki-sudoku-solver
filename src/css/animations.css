@@ -1,31 +1,76 @@
-/* Animations and Transitions */
+/* Shared Animations */
 @keyframes gradient {
     0% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
     100% { background-position: 0% 50%; }
 }
 
+@keyframes fade-in-title {
+    from {
+        opacity: 0;
+        transform: translateZ(0) translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateZ(100px) translateY(0);
+    }
+}
+
+@keyframes fade-up {
+    from {
+        opacity: 0;
+        transform: translateZ(0) translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateZ(75px) translateY(0);
+    }
+}
+
+@keyframes float {
+    0% {
+        transform: translate3d(0, 0, 50px) rotate(0deg);
+    }
+    50% {
+        transform: translate3d(var(--float-x, -30px), var(--float-y, -30px), 100px) rotate(180deg);
+    }
+    100% {
+        transform: translate3d(0, 0, 50px) rotate(360deg);
+    }
+}
+
+@keyframes fade-in {
+    from { opacity: 0; }
+    to { opacity: 0.8; }
+}
+
 /* Page Transitions */
-.solver-section {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
-}
-
-.solver-section.visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-
 .landing-section {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     opacity: 1;
-    transform: translateY(0);
-    transition: opacity 0.6s ease, transform 0.6s ease;
+    transition: opacity 0.3s ease;
 }
 
 .landing-section.hiding {
     opacity: 0;
-    transform: translateY(-20px);
+}
+
+.solver-section {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.solver-section.visible {
+    opacity: 1;
 }
 
 /* Instructions Animations */
@@ -53,7 +98,32 @@ input,
     transition: all 0.3s ease;
 }
 
-/* Background Animation */
+/* Landing to Solver Transitions */
+#landing {
+    opacity: 1;
+    transition: opacity 0.3s ease-out;
+}
+
 .solver-section {
+    opacity: 0;
+    transition: opacity 0.3s ease-in;
     animation: gradient 15s ease infinite;
+}
+
+/* Mobile menu animation and transitions */
+@media screen and (max-width: 1024px) {
+    .menu-toggle {
+        transform: translateX(0);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        will-change: transform, background-color;
+    }
+
+    .menu-toggle:hover {
+        background-color: rgba(255, 255, 255, 0.25);
+        transform: translateY(-2px);
+    }
+
+    .menu-toggle:active {
+        transform: translateY(0);
+    }
 }
