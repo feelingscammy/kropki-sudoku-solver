@@ -1,0 +1,187 @@
+/* Controls Styling */
+.controls {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 30px 40px;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    width: fit-content;
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    flex-wrap: wrap;
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    transform: translateZ(25px);
+    margin: 0 auto;
+}
+
+.dot-selector {
+    padding: 12px 24px;
+    margin: 0;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.1);
+    cursor: pointer;
+    font-weight: 600;
+    color: white;
+}
+
+.dot-selector:hover {
+    transform: translateY(-2px);
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.dot-selector.selected {
+    background: rgba(66, 153, 225, 0.3);
+    border-color: rgba(144, 205, 244, 0.5);
+    color: white;
+}
+
+/* Game Controls */
+.button-group {
+    display: flex;
+    gap: 10px;
+}
+
+#solveBtn, #clearBtn {
+    padding: 12px 28px;
+    font-size: 16px;
+    font-weight: 600;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    margin: 0 10px;
+    backdrop-filter: blur(10px);
+    position: relative;
+    overflow: hidden;
+}
+
+#solveBtn {
+    background: rgba(66, 225, 161, 0.2);
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+#clearBtn {
+    background: rgba(243, 49, 49, 0.251);
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+#solveBtn:hover, #clearBtn:hover {
+    transform: translateY(-2px);
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.3);
+    box-shadow:
+        0 15px 35px rgba(0,0,0,0.2),
+        0 0 25px rgba(255,255,255,0.1);
+}
+
+/* Generator Controls */
+.generator-controls {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 20px 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    width: fit-content;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    transform: translateZ(25px);
+    margin-bottom: 20px;
+}
+
+.generator-controls select {
+    padding: 8px 16px;
+    border-radius: 8px;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    font-size: 14px;
+    cursor: pointer;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    padding-right: 24px; /* Space for custom arrow */
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3e%3cpath d='M7 10l5 5 5-5z'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 8px center;
+    background-size: 16px;
+}
+
+.generator-controls select:hover {
+    background: #4299e1;
+}
+
+#generateBtn, #checkBtn {
+    padding: 8px 16px;
+    border-radius: 8px;
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    cursor: pointer;
+}
+
+#generateBtn {
+    background: rgba(66, 225, 161, 0.2);
+}
+
+#checkBtn {
+    background: rgba(66, 153, 225, 0.2);
+}
+
+#generateBtn:hover, #checkBtn:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* Responsive Controls */
+@media screen and (max-width: 768px) {
+    .controls {
+        padding: 15px 20px;
+        gap: 12px;
+        margin: 0 15px;
+        width: auto;
+        max-width: calc(100% - 30px);
+    }
+
+    .dot-selector {
+        padding: 8px 16px;
+        font-size: 14px;
+    }
+
+    #solveBtn, #clearBtn {
+        padding: 10px 20px;
+        font-size: 14px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .controls {
+        padding: 12px 15px;
+        margin: 0 10px;
+    }
+
+    .dot-selector {
+        width: 100%;
+        text-align: center;
+    }
+
+    .button-group {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    #solveBtn, #clearBtn {
+        width: 100%;
+        margin: 0;
+    }
+}
+
+@media screen and (max-height: 600px) and (orientation: landscape) {
+    .controls {
+        padding: 10px;
+    }
+}

@@ -1,0 +1,59 @@
+/* Animations and Transitions */
+@keyframes gradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Page Transitions */
+.solver-section {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.solver-section.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.landing-section {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.landing-section.hiding {
+    opacity: 0;
+    transform: translateY(-20px);
+}
+
+/* Instructions Animations */
+.instructions {
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.close-instructions {
+    transition: all 0.2s ease;
+}
+
+.close-instructions:hover {
+    transform: rotate(90deg);
+}
+
+/* Button and Control Animations */
+.dot-selector,
+#solveBtn,
+#clearBtn,
+#instructionsBtn,
+#generateBtn,
+#checkBtn,
+input,
+.dot {
+    transition: all 0.3s ease;
+}
+
+/* Background Animation */
+.solver-section {
+    animation: gradient 15s ease infinite;
+}
