@@ -117,14 +117,63 @@ body.game-active .side-menu {
 
 /* Select Styling */
 .generator-options select {
-    padding-right: 24px;
+    width: 100%;
+    padding: 12px 24px;
+    background-color: rgba(255, 255, 255, 0.1);
     background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3e%3cpath d='M7 10l5 5 5-5z'/%3e%3c/svg%3e");
     background-repeat: no-repeat;
-    background-position: right 8px center;
-    background-size: 16px;
+    background-position: right 20px center;
+    background-size: 25px;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    color: white;
+    font-size: 14px;
+    font-weight: 600;
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
+    margin-bottom: 8px;    backdrop-filter: blur(10px);
+}
+
+/* Firefox-specific styles moved to firefox.css */
+
+/* Dropdown styling for options */
+.generator-options select option {
+    background-color: #1e293b;
+    color: rgba(255, 255, 255, 0.9);
+    padding: 12px 15px;
+    font-weight: 500;
+    cursor: pointer;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+    font-size: 14px;
+}
+
+.generator-options select option:first-child {
+    border-radius: 8px 8px 0 0;
+}
+
+.generator-options select option:last-child {
+    border-bottom: none;
+    border-radius: 0 0 8px 8px;
+}
+
+/* Hover state for options - Webkit browsers */
+.generator-options select option:hover,
+.generator-options select option:focus,
+.generator-options select option:active {
+    background: linear-gradient(to right, rgba(56, 189, 248, 0.2), rgba(59, 130, 246, 0.2));
+    color: white;
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
+}
+
+.generator-options select option:checked {
+    background: linear-gradient(to right, rgba(56, 189, 248, 0.3), rgba(59, 130, 246, 0.3));
+    color: rgb(0, 0, 0);
+    box-shadow:
+        inset 0 0 12px rgba(0, 0, 0, 0.1),
+        0 0 15px rgba(56, 189, 248, 0.2);
+    background-color: rgba(56, 189, 248, 0.3);
+    font-weight: 600;
 }
 
 /* Menu Toggle */

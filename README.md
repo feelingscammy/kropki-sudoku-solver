@@ -49,4 +49,5 @@ Kropki Sudoku Solver/
 - Pure HTML, CSS, and JavaScript implementation
 - No external dependencies
 - Modular code organization
-- Responsive design with CSS Grid and Flexbox
+- Responsive design
+- Optimized for both Chromium based browsers and Firefox

@@ -1,0 +1,101 @@
+/* Firefox-specific optimizations for maximum performance */
+@-moz-document url-prefix() {
+    /* Remove all backdrop filters and use solid colors */
+    .side-menu,
+    .section,
+    .grid-action,
+    .dot-selector,
+    .action-buttons button,
+    .generator-options select,
+    .menu-toggle {
+        backdrop-filter: none;
+        background-color: #1e293b;
+        transition: none;
+    }
+
+    /* Specific button colors */
+    #solveBtn, #generateBtn { background-color: #166534; }
+    #clearBtn { background-color: #991b1b; }
+    #checkBtn { background-color: #1e40af; }
+
+    /* Side menu optimization */
+    .side-menu {
+        background: #1e293b;
+        transition: none;
+        border-left: 2px solid #334155;
+        box-shadow: none;
+    }
+
+    body.game-active .side-menu {
+        transition: none;
+    }
+
+    /* Section styling */
+    .section {
+        background: #1e293b;
+        border: 2px solid #334155;
+        box-shadow: none;
+    }
+
+    /* Button and select hover states - no animations */
+    .grid-action:hover,
+    .dot-selector:hover,
+    .action-buttons button:hover,
+    .generator-options select:hover,
+    #solveBtn:hover,
+    #clearBtn:hover,
+    #generateBtn:hover,
+    #checkBtn:hover {
+        transform: none;
+        background: #334155;
+        border-color: #475569;
+        box-shadow: none;
+    }
+
+    /* Select element optimization */
+    .generator-options select {
+        background-color: #1e293b;
+        color: white;
+        color-scheme: dark;
+        border: 2px solid #334155;
+    }
+
+    .generator-options select:focus {
+        outline: none;
+        border-color: #3b82f6;
+        box-shadow: none;
+    }
+
+    /* Option styling */
+    .generator-options select option {
+        background-color: #1e293b;
+        color: white;
+        text-shadow: none;
+    }
+
+    .generator-options select option:checked {
+        background-color: #3b82f6;
+        color: white;
+        box-shadow: none;
+    }
+
+    /* Menu toggle */
+    .menu-toggle {
+        background: #1e293b;
+        border: 2px solid #334155;
+    }
+
+    .menu-toggle:hover {
+        background: #334155;
+    }
+
+    /* Remove all transitions */
+    * {
+        transition: none !important;
+    }
+
+    /* Disable transforms */
+    .side-menu.active ~ .menu-toggle {
+        transform: none;
+    }
+}
